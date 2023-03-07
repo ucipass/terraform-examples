@@ -61,7 +61,7 @@ variable "vmseries_ami_id" {
 
 variable "instance_type" {
   description = "EC2 instance type."
-  default     = "m5.xlarge"
+  default     = "m5.2xlarge"
   type        = string
 }
 
