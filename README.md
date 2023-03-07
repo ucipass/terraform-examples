@@ -1,2 +1,2 @@
 # terraform-examples
-Different Terraform examples for demo use
+Terraform example for 3 VPC with Transit Gateway and a Palo Alto Firewall in the "mainvpc"
