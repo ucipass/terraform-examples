@@ -2,44 +2,44 @@
 ## Network Single AZ Public Only - Variables #
 ##############################################
 
-# AWS AZ
-#variable "aws_az" {
-#  type        = string
-#  description = "AWS AZ"
-#  default     = "eu-west-1c"
-#}
 
 # VPC Variables
-variable "vpcmain_cidr" {
+variable "vpc_cidr" {
   type        = string
   description = "CIDR for the VPC"
-  default     = "10.101.0.0/16"
+  default     = "10.100.0.0/16"
+}
+
+variable "vpc_name" {
+  type        = string
+  description = "Name of the VPC"
+  default     = "vpc100"
 }
 
 # Subnet Variables
-variable "vpcmain_public_subnet_cidr1" {
+variable "public_subnet_cidr1" {
   type        = string
   description = "CIDR for the public subnet"
-  default     = "10.101.11.0/24"
+  default     = "10.100.11.0/24"
 }
 
 # Subnet Variables
-variable "vpcmain_public_subnet_cidr2" {
+variable "public_subnet_cidr2" {
   type        = string
   description = "CIDR for the public subnet"
-  default     = "10.101.12.0/24"
+  default     = "10.100.12.0/24"
 }
 
 # Subnet Variables
-variable "vpcmain_private_subnet_cidr1" {
+variable "private_subnet_cidr1" {
   type        = string
   description = "CIDR for the public subnet"
-  default     = "10.101.21.0/24"
+  default     = "10.100.21.0/24"
 }
 
 # Subnet Variables
-variable "vpcmain_private_subnet_cidr2" {
+variable "private_subnet_cidr2" {
   type        = string
   description = "CIDR for the public subnet"
-  default     = "10.101.22.0/24"
+  default     = "10.100.22.0/24"
 }
