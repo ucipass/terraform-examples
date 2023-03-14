@@ -17,28 +17,28 @@ resource "aws_s3_bucket_object" "config" {
     bucket = aws_s3_bucket.s3_bucket_palo.id
     acl    = "private"
     key    = "config/"
-    source = "/dev/null"
+    content_type = "application/x-directory"
 }
 
 resource "aws_s3_bucket_object" "content" {
     bucket = aws_s3_bucket.s3_bucket_palo.id
     acl    = "private"
     key    = "content/"
-    source = "/dev/null"
+    content_type = "application/x-directory"
 }
 
 resource "aws_s3_bucket_object" "license" {
     bucket = aws_s3_bucket.s3_bucket_palo.id
     acl    = "private"
     key    = "license/"
-    source = "/dev/null"
+    content_type = "application/x-directory"
 }
 
 resource "aws_s3_bucket_object" "software" {
     bucket = aws_s3_bucket.s3_bucket_palo.id
     acl    = "private"
     key    = "software/"
-    source = "/dev/null"
+    content_type = "application/x-directory"
 }
 
 # Upload bootstrap

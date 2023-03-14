@@ -61,7 +61,6 @@ resource "aws_eip" "public_ip_mgmt" {
   # associate_with_private_ip = "10.1.1.10"
   tags = {
     Name = "${lower(var.palo_name)}-eip-mgmt"
-    
   }
   depends_on = [
     aws_instance.palo
