@@ -1,0 +1,15 @@
+Section: IOS configuration
+username lab privilege 15 password lab
+ip domain-name cisco.com
+crypto key generate rsa modulus 2048
+line vty 0 4
+login local
+hostname C8000V1
+interface GigabitEthernet1
+description “DHCP based IP address config”
+ip address dhcp
+no shutdown
+interface GigabitEthernet2
+description “DHCP based IP address config”
+ip address dhcp
+no shutdown

@@ -3,8 +3,9 @@ Terraform examples mainly for quick network and proof of concept setup. The modu
 
 # Examples
 - example1: Single VPC with a Palo Alto VM instance demonstrating the bootstrap process.
-- example2: Single VPC with an Ubuntu 20.04 VM instance script installs nginx.
+- example2: Single VPC with a Linux Ubuntu 20.04 VM instance script installs nginx.
 - example3: Single VPC with a Windows 2019 VM instance script installs IIS.
+- example4: Single VPC with a Cisco Catalyst 8000V.
 
 # Modules
 - key-pair: generate SSH key pair in case there is not one available for use.
