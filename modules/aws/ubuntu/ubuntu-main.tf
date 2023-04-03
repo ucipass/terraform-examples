@@ -10,12 +10,13 @@ data "aws_ami" "ubuntu" {
 }
 
 
-resource "aws_instance" "EC2_1" {
+resource "aws_instance" "ubuntu" {
   ami  = data.aws_ami.ubuntu.id
   instance_type = var.instance_type
   key_name = var.ssh_key_name
   vpc_security_group_ids = [aws_security_group.ub_sg.id]
   subnet_id = var.subnet_id
+  user_data = var.user_data
   
   # user_data = file("./script.sh")
   # provisioner "remote-exec" {

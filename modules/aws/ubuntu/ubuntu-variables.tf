@@ -24,3 +24,8 @@ variable "instance_type" {
   default = "t2.micro"
 }
 
+variable "user_data" {
+  description = "ssh_key_name"
+  type = string
+  default = ""
+}

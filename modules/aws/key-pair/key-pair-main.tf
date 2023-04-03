@@ -9,7 +9,8 @@ resource "aws_key_pair" "key_pair" {
 }
 
 
-resource "local_file" "foo" {
+resource "local_file" "private_key_pem" {
   content  = tls_private_key.key.private_key_pem
   filename = "./${var.ssh_key_name}.pem"
+  file_permission = "0600"
 }
