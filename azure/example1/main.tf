@@ -65,3 +65,9 @@ resource "azurerm_windows_virtual_machine" "example" {
     version   = "latest"
   }
 }
+
+
+output "myserver" {
+  value = azurerm_windows_virtual_machine.example.public_ip_addresses
+  sensitive = true
+}

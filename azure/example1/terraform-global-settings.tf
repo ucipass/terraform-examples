@@ -17,6 +17,7 @@ variable "app_environment" {
 variable "ssh_key_name" {
   type        = string
   description = "Application environment"
+  default     = ""  # if not, set to "" should crete an auto-generated key.
 }
 
 
