@@ -17,7 +17,7 @@ Terraform examples mainly for quick network and proof of concept setup. The modu
 - example3: AWS Single VPC with a Cisco Catalyst 8000V.
 - example4: AWS Single VPC with a Palo Alto VM instance demonstrating the bootstrap process.
 - example5: AWS ECS Fargate with NGINX default webserver
-- example6: AWS Lambda function deployed
+- example6: AWS Lambda function deployed with API Gateway REST APIs
 
 ## Azure
 - example1: Azure Single  VNET with a Windows2019 instance script installs IIS.
