@@ -14,11 +14,11 @@ Terraform examples mainly for quick network and proof of concept setup. The modu
 ## AWS
 - example1: AWS Single VPC with a Windows 2019 VM instance script installs IIS.
 - example2: AWS Single VPC with a Linux Ubuntu 20.04 VM instance script installs nginx.
+- example3: AWS Single VPC with a Cisco Catalyst 8000V.
 - example3: AWS Single VPC with a Palo Alto VM instance demonstrating the bootstrap process.
-- example4: AWS Single VPC with a Cisco Catalyst 8000V.
-- example5: Azure Single  VNET with a Windows2019 instance
 - example6: AWS ECS Fargate with NGINX default webserver
 
 ## Azure
 - example1: Azure Single  VNET with a Windows2019 instance script installs IIS.
+- example2: Azure Single  VNET with an Ubuntu instance script installs NGINX.
 
