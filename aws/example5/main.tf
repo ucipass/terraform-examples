@@ -1,5 +1,5 @@
 module "vpc100" {
-  source = "../modules/vpc-2public-2private"
+  source = "../../modules/aws/vpc"
   vpc_name = "${lower(var.app_name)}-${lower(var.app_environment)}-vpc100"
   vpc_cidr = "10.100.0.0/16"
   public_subnet_cidr1  = "10.100.11.0/24"
@@ -107,17 +107,24 @@ resource "aws_ecs_service" "this" {
 
 }
 
-resource "terraform_data" "publicip" {
+# This will always run to retrieve the public IP until better solution is found
+resource "null_resource" "publicip" {
+  triggers = {
+    always_run = "${timestamp()}"
+  }
+
   provisioner "local-exec" {
     command = <<EOF
         clustername=${lower(var.app_name)}-${lower(var.app_environment)}-cluster
         taskid=$(aws ecs list-tasks --cluster $clustername --query "taskArns[0]" --output text)
-        eni=$(aws ecs describe-tasks --tasks $taskid --cluster example6-dev-cluster --query "tasks[0].attachments[0].details[?name=='networkInterfaceId'].value" --output text)
+        eni=$(aws ecs describe-tasks --tasks $taskid --cluster $clustername --query "tasks[0].attachments[0].details[?name=='networkInterfaceId'].value" --output text)
         publicip=$(aws ec2 describe-network-interfaces --query "NetworkInterfaces[?NetworkInterfaceId=='$eni'].Association.PublicIp" --output text)
         echo "$publicip"
     EOF
   }
+
   depends_on = [
     aws_ecs_service.this
   ]
 }
+

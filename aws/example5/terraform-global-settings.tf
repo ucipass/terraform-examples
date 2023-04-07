@@ -17,6 +17,7 @@ variable "app_environment" {
 variable "ssh_key_name" {
   type        = string
   description = "Application environment"
+  default     = ""
 }
 
 variable "aws_profile" {
