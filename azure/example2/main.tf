@@ -1,14 +1,12 @@
-provider "azurerm" {
-  features {}
-}
+
 
 resource "azurerm_resource_group" "example" {
   name     = "example-resource-group"
-  location = "East US"
+  location = "eastus"
 }
 
 resource "azurerm_virtual_network" "example" {
-  name                = "example-network"
+  name                = "example-vnet"
   address_space       = ["10.0.0.0/16"]
   location            = azurerm_resource_group.example.location
   resource_group_name = azurerm_resource_group.example.name
@@ -29,43 +27,49 @@ resource "azurerm_public_ip" "example" {
 }
 
 resource "azurerm_network_interface" "example" {
-  name                = "example-network-interface"
+  name                = "example-nic"
   location            = azurerm_resource_group.example.location
   resource_group_name = azurerm_resource_group.example.name
 
   ip_configuration {
-    name                          = "example-configuration"
+    name                          = "example-config"
     subnet_id                     = azurerm_subnet.example.id
     private_ip_address_allocation = "Dynamic"
     public_ip_address_id          = azurerm_public_ip.example.id
   }
 }
 
-resource "azurerm_storage_account" "example" {
-  name                     = "examplestorageaccountaa"
-  resource_group_name      = azurerm_resource_group.example.name
-  location                 = azurerm_resource_group.example.location
-  account_tier             = "Standard"
-  account_replication_type = "LRS"
-}
-
-resource "azurerm_windows_virtual_machine" "example" {
+resource "azurerm_linux_virtual_machine" "example" {
   name                  = "example-vm"
-  resource_group_name   = azurerm_resource_group.example.name
   location              = azurerm_resource_group.example.location
-  size                  = "Standard_DS2_v2"
-  admin_username        = "adminuser"
-  admin_password        = "Password123#"
+  resource_group_name   = azurerm_resource_group.example.name
   network_interface_ids = [azurerm_network_interface.example.id]
+  size                  = "Standard_B1s"
+  admin_username        = "exampleuser"
+  admin_password        = "ExamplePassword1234!"
+  disable_password_authentication = false
+
   os_disk {
-    name              = "example-os-disk"
-    caching           = "ReadWrite"
+    caching              = "ReadWrite"
     storage_account_type = "Standard_LRS"
   }
+
   source_image_reference {
-    publisher = "MicrosoftWindowsServer"
-    offer     = "WindowsServer"
-    sku       = "2019-Datacenter"
+    publisher = "Canonical"
+    offer     = "0001-com-ubuntu-server-jammy"
+    sku       = "22_04-lts-gen2"
     version   = "latest"
   }
+
+  custom_data = base64encode(<<EOF
+              #!/bin/bash
+              sudo apt-get update
+              sudo apt-get install apache2 -y
+              EOF
+  )
+}
+
+output "public_ip_addresses" {
+  value = azurerm_linux_virtual_machine.example.public_ip_addresses
+  sensitive = false
 }

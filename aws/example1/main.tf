@@ -18,7 +18,7 @@ module "win2019" {
   instance_name = "${lower(var.app_name)}-${lower(var.app_environment)}-win2019"
   subnet_id     = module.vpc100.public_subnet1_id
   vpc_id        = module.vpc100.vpc_id
-  ssh_key_name  = module.key_pair.ssh_key_name
+  ssh_key_name  = var.ssh_key_name != "" ? var.ssh_key_name : module.key_pair.ssh_key_name
   user_data     = data.template_file.windows_user_data.rendered
 }
 

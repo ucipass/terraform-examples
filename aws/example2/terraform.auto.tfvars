@@ -11,7 +11,7 @@ aws_profile    = "default"
 # export TF_VAR_aws_access_key=
 
 # SSH Key
-ssh_key_name   = "AA"
+# ssh_key_name   = "AA"
 
 
 ## Linux Virtual Machine

@@ -67,7 +67,7 @@ resource "azurerm_windows_virtual_machine" "example" {
 }
 
 
-output "myserver" {
+output "public_ip_addresses" {
   value = azurerm_windows_virtual_machine.example.public_ip_addresses
-  sensitive = true
+  sensitive = false
 }

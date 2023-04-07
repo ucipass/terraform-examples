@@ -1,16 +1,17 @@
 # Application Definition 
-app_name        = "example3" # Do NOT enter any spaces
+app_name        = "example4" # Do NOT enter any spaces
 app_environment = "dev"       # Dev, Test, Staging, Prod, etc
 
 # AWS Settings
 aws_region     = "us-east-2"
+aws_profile    = "default"
 # aws_access_key = will be provided via TF_VAR_aws_access_key environment variable
 # aws_secret_key = will be provided via TF_VAR_aws_secret_key environment variable
 # export TF_VAR_aws_access_key=
 # export TF_VAR_aws_access_key=
 
 # SSH Key
-ssh_key_name   = "AA"
+# ssh_key_name   = "AA"
 
 
 ## Linux Virtual Machine
