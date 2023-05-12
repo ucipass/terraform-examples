@@ -69,7 +69,7 @@ resource "aws_route_table_association" "public-rt-association1" {
   route_table_id = aws_route_table.public-rt.id
 }
 
-# Assign the public route table to the public subnet1
+# Assign the public route table to the public subnet2
 resource "aws_route_table_association" "public-rt-association2" {
   subnet_id      = aws_subnet.public-subnet2.id
   route_table_id = aws_route_table.public-rt.id
@@ -99,10 +99,31 @@ resource "aws_subnet" "private-subnet2" {
 }
 
 # Define the private route table
-resource "aws_route_table" "private-rt" {
+resource "aws_route_table" "private-rt1" {
   vpc_id = aws_vpc.vpc.id
   tags = {
-    Name = "${lower(var.vpc_name)}-private-subnet-rt"
+    Name = "${lower(var.vpc_name)}-private-subnet-rt1"
 
   }
+}
+
+# Define the private route table
+resource "aws_route_table" "private-rt2" {
+  vpc_id = aws_vpc.vpc.id
+  tags = {
+    Name = "${lower(var.vpc_name)}-private-subnet-rt2"
+
+  }
+}
+
+# Assign the private route table to the private subnet1
+resource "aws_route_table_association" "private-rt-association1" {
+  subnet_id      = aws_subnet.private-subnet1.id
+  route_table_id = aws_route_table.private-rt1.id
+}
+
+# Assign the private route table to the private subnet2
+resource "aws_route_table_association" "private-rt-association2" {
+  subnet_id      = aws_subnet.private-subnet2.id
+  route_table_id = aws_route_table.private-rt2.id
 }

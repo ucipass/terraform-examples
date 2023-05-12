@@ -58,7 +58,7 @@ resource "aws_instance" "palo" {
 resource "aws_eip" "public_ip_mgmt" {
   vpc                       = true
   network_interface         = aws_network_interface.mgmt.id
-  # associate_with_private_ip = "10.1.1.10"
+  associate_with_private_ip = var.ip_address_mgmt[0]
   tags = {
     Name = "${lower(var.palo_name)}-eip-mgmt"
   }
@@ -71,7 +71,7 @@ resource "aws_eip" "public_ip_mgmt" {
 resource "aws_eip" "public_ip_eth1" {
   vpc                       = true
   network_interface         = aws_network_interface.eth1.id
-  # associate_with_private_ip = "10.1.1.10"
+  associate_with_private_ip = var.ip_address_eth1[0]
   tags = {
     Name = "${lower(var.palo_name)}-eip-eth1"
     
@@ -84,7 +84,7 @@ resource "aws_eip" "public_ip_eth1" {
 
 resource "aws_network_interface" "mgmt" {
   subnet_id         = var.mgmt_subnet_id
-  # private_ips       = [ var.private_ip2 ]
+  private_ips       = var.ip_address_mgmt 
   security_groups   =  [aws_security_group.aws-palo-sg.id]
   source_dest_check = false
   tags = {
@@ -95,7 +95,7 @@ resource "aws_network_interface" "mgmt" {
 
 resource "aws_network_interface" "eth1" {
   subnet_id         = var.eth1_subnet_id
-  # private_ips       = [ var.private_ip2 ]
+  private_ips       = var.ip_address_eth1 
   security_groups   =  [aws_security_group.aws-palo-sg.id]
   source_dest_check = false
   tags = {
@@ -107,7 +107,7 @@ resource "aws_network_interface" "eth1" {
 
 resource "aws_network_interface" "eth2" {
   subnet_id         = var.eth2_subnet_id
-  # private_ips       = [ var.private_ip2 ]
+  private_ips       = var.ip_address_eth2 
   security_groups   =  [aws_security_group.aws-palo-sg.id]
   source_dest_check = false
   tags = {

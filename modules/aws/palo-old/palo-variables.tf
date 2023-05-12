@@ -25,33 +25,14 @@ variable "mgmt_subnet_id" {
   type        = string
 }
 
-variable "ip_address_mgmt" {
-  description = "IP address of management interface."
-  type        = list
-  default     = []
-}
-
 variable "eth1_subnet_id" {
   description = "Subnet id for the Palo Alto eth1 interface."
   type        = string
 }
 
-variable "ip_address_eth1" {
-  description = "IP address of eth1 interface."
-  type        = list
-  default     = []
-}
-
-
 variable "eth2_subnet_id" {
   description = "Subnet id for the Palo Alto eth2 interface."
   type        = string
-}
-
-variable "ip_address_eth2" {
-  description = "IP address of eth2 interface."
-  type        = list
-  default     = []
 }
 
 

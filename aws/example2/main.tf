@@ -17,18 +17,20 @@ module "ubuntu" {
   source = "../../modules/aws/ubuntu"
   instance_name = "${lower(var.app_name)}-${lower(var.app_environment)}-ubuntu1"
   subnet_id     = module.vpc100.public_subnet1_id
+  ip_address = "10.100.11.11"
   vpc_id        = module.vpc100.vpc_id
   ssh_key_name  = var.ssh_key_name != "" ? var.ssh_key_name : module.key_pair.ssh_key_name
-  user_data     = data.template_file.windows_user_data.rendered
+  user_data     = data.template_file.user_data.rendered
 }
 
 # Bootstrapping PowerShell Script
-data "template_file" "windows_user_data" {
+data "template_file" "user_data" {
   template = <<EOF
 #!/bin/bash
 
 sudo apt update -y
-sudo apt install nginx -y
+sudo apt install nodejs -y
+sudo node -e "require('http').createServer((req,res)=>{res.end('My hostname is ${lower(var.app_name)}-${lower(var.app_environment)}-ubuntu1\nYour IP address is: '+req.socket.remoteAddress);}).listen(80,'0.0.0.0');"
 
 EOF
 }
@@ -37,3 +39,4 @@ EOF
 output "public_ip" {
   value = module.ubuntu.aws_instance.public_ip
 }
+

@@ -9,16 +9,34 @@ data "aws_ami" "ubuntu" {
   }
 }
 
+resource "aws_network_interface" "eth0" {
+  subnet_id   = var.subnet_id
+  private_ips = [var.ip_address]
+  security_groups = [aws_security_group.ub_sg.id]
+
+  tags = {
+    Name = "${lower(var.instance_name)}-eth0"
+  }
+}
+
+# resource "aws_network_interface_attachment" "eth0" {
+#   instance_id          = aws_instance.ubuntu.id
+#   network_interface_id = aws_network_interface.eth0.id
+#   device_index         = 0
+# }
 
 resource "aws_instance" "ubuntu" {
   ami  = data.aws_ami.ubuntu.id
   instance_type = var.instance_type
   key_name = var.ssh_key_name
-  vpc_security_group_ids = [aws_security_group.ub_sg.id]
-  subnet_id = var.subnet_id
+
+  network_interface {
+    network_interface_id = aws_network_interface.eth0.id
+    device_index         = 0
+  }
+
   user_data = var.user_data
-  
-  # user_data = file("./script.sh")
+    # user_data = file("./script.sh")
   # provisioner "remote-exec" {
   #   inline = [ "cloud-init status --wait" ]
   # }

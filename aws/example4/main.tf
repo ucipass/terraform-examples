@@ -15,15 +15,18 @@ module "key_pair"{
 
 
 module "palo1" {
-  source         = "../../modules/aws/palo"
-  palo_name      = "${lower(var.app_name)}-${lower(var.app_environment)}-palo1"
-  ssh_key_name   = var.ssh_key_name != "" ? var.ssh_key_name : module.key_pair.ssh_key_name
-  vpc_id         = module.vpc100.vpc_id
-  mgmt_subnet_id = module.vpc100.public_subnet2_id
-  eth1_subnet_id = module.vpc100.public_subnet2_id
-  eth2_subnet_id = module.vpc100.private_subnet2_id
-  bootstrap_file = "/home/aarato/github/terraform-examples/bootstrap.xml"
-  initcfg_file = "/home/aarato/github/terraform-examples/init-cfg.txt"
+  source          = "../../modules/aws/palo"
+  palo_name       = "${lower(var.app_name)}-${lower(var.app_environment)}-palo1"
+  ssh_key_name    = var.ssh_key_name != "" ? var.ssh_key_name : module.key_pair.ssh_key_name
+  vpc_id          = module.vpc100.vpc_id
+  mgmt_subnet_id  = module.vpc100.public_subnet2_id
+  ip_address_mgmt = "10.100.21.12"
+  eth1_subnet_id  = module.vpc100.public_subnet2_id
+  ip_address_eth1 = "10.100.21.11"
+  eth2_subnet_id  = module.vpc100.private_subnet2_id
+  ip_address_eth2 = "10.100.22.11"
+  bootstrap_file  = "/home/aarato/github/terraform-examples/bootstrap.xml"
+  initcfg_file    = "/home/aarato/github/terraform-examples/init-cfg.txt"
 }
 
 output "mgmt_ip_public" {

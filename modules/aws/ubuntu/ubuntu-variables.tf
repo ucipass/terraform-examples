@@ -8,6 +8,12 @@ variable "subnet_id" {
   type = string
 }
 
+variable "ip_address" {
+  description = "ip address"
+  type = string
+  default = ""
+}
+
 variable "vpc_id" {
   description = "vpc_id"
   type = string

@@ -39,19 +39,15 @@ resource "aws_s3_bucket_object" "software" {
 resource "aws_s3_bucket_object" "bootstrap" {
   bucket = aws_s3_bucket.s3_bucket_palo.id
   key    = "/config/bootstrap.xml"
-  source = var.bootstrap_file
-  etag = filemd5(var.bootstrap_file)
-  # source = "./bootstrap.xml"
-  # etag = filemd5("./bootstrap.xml")
+  source = "./bootstrap.xml"
+  etag = filemd5("./bootstrap.xml")
 }
 
 # Upload bootstrap
 resource "aws_s3_bucket_object" "initcfg" {
   bucket = aws_s3_bucket.s3_bucket_palo.id
   key    = "/config/init-cfg.txt"
-  source = var.initcfg_file
-  etag = filemd5(var.initcfg_file)
-  # source = "./init-cfg.txt"
-  # etag = filemd5("./init-cfg.txt")
+  source = "./init-cfg.txt"
+  etag = filemd5("./init-cfg.txt")
 }
 
